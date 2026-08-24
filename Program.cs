@@ -1,5 +1,6 @@
 using AppExemplo.Components;
 using AppExemplo.Configs;
+using AppExemplo.DAO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddScoped<Conexao>();
+builder.Services.AddScoped<ProcessoDAO>();
 
 builder.Services.AddScoped<Conexao>();
 

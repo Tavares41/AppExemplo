@@ -1,4 +1,7 @@
 ﻿@page "/processos"
+@rendermode InteractiveServer
+@inject ProcessoDAO dao;
+
 <PageTitle>Proccessos - Sistema de Controle de Processos </PageTitle>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -30,7 +33,7 @@
 					<td>João Teixeira</td>
 					<td class="text-truncate">Solicitação de Isenção de IPTU</td>
 					<td>
-						<i class="bi bi-check-circle">Concluido</i>
+						<i class="bi bi-check-circle"> Concluido</i>
 					</td>
 					<td class="text-end">
 						<div class="btn-group btn-group-sm"> 
