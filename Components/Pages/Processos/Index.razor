@@ -10,6 +10,25 @@
 	</div>
 </div>
 
+<div class="custom-tables-card"> 
+	@code{
+		private List<Processo>? processos;
+
+		protected override void OnInitialized()
+		{
+			CarregarProcessos();
+		}
+
+		private void CarregarProcessos()
+		{
+			processos = dao.Listar();
+		}
+	}
+
+
+</div>
+
+
 <div class="custom-table-card">
 	<div class="table-responsive"> 
 		
@@ -27,13 +46,17 @@
 
 			<tbody> 
 
+
+			@foreach (var p in processos) {
+					
+				
 				<tr> 
-					<td>1</td>
-					<td>2026/0001</td>
-					<td>João Teixeira</td>
-					<td class="text-truncate">Solicitação de Isenção de IPTU</td>
+					<td>@p.Id</td>
+					<td>@p.Numero</td>
+					<td>@p.Interessado</td>
+					<td class="text-truncate"> @p.Assunto</td>
 					<td>
-						<i class="bi bi-check-circle"> Concluido</i>
+						<i class="bi bi-check-circle"> @p.Situacao</i>
 					</td>
 					<td class="text-end">
 						<div class="btn-group btn-group-sm"> 
@@ -47,6 +70,7 @@
 						</div>
 					</td>
 				</tr>
+				}
 
 				<tr>
 					<td>2</td>
