@@ -49,5 +49,31 @@ namespace AppExemplo.DAO
 
         }
 
+        public void Inserir(Processo processo)
+        {
+            try
+            {
+                using var con = _conexao.GetConnection();
+
+                string sql = @"INSERT INTO processos (numero_pro, interessado_pro, assunto_pro, descricao_pro, situacao_pro) VALUES (@numero, @interessado, @assunto, @descricao, @situacao)";
+
+                using var comando = con.CreateCommand();
+
+                comando.CommandText = sql;
+
+                comando.Parameters.AddWithValue("@numero", processo.Numero);
+                comando.Parameters.AddWithValue("@interessado", processo.Interessado);
+                comando.Parameters.AddWithValue("@assunto", processo.Assunto);
+                comando.Parameters.AddWithValue("@descricao", processo.Descricao);
+                comando.Parameters.AddWithValue("@situacao", processo.Situacao);
+
+                comando.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
     }
 }
