@@ -1,9 +1,10 @@
-@page "/processos/Cadastro"
+@page "/processos/cadastro"
+@page "/processos/editar/{Id:int}"
 @rendermode InteractiveServer
 @inject ProcessoDAO dao
 @inject NavigationManager NavigationManager
 
-<PageTitle>Novo Processo - Sistema de Controle de Processos</PageTitle>
+<PageTitle>@Titulo - Sistema de Controle de Processos</PageTitle>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
@@ -25,7 +26,7 @@
 
             <div class="col-md-4">
                 <label for="situacao" class="form-label">Situação</label>
-                <InputSelect id="situacao" class="form-select" @bind-Value="processo.Situacao" >
+                <InputSelect id="situacao" class="form-select" @bind-Value="processo.Situacao">
                     <option value="Aberto">Aberto</option>
                     <option value="Em analise">Em análise</option>
                     <option value="Pendente">Pendente</option>
@@ -74,12 +75,43 @@
 
 @code {
     private Processo processo = new();
+    private bool processoEncontrado = true;
+
+    [Parameter]
+    public int? Id { get; set; }
+
+    private string Titulo => Id.HasValue ? "Editar Processo" : "Cadastro de Processo";
+
+    protected override void OnParametersSet()
+    {
+        if (!Id.HasValue)
+        {
+            processo = new Processo();
+            processoEncontrado = true;
+            return;
+        }
+
+        var processoCarregado = dao.ObterPorId(Id.Value);
+
+        processoEncontrado = processoCarregado is not null;
+
+        if (processoCarregado is not null)
+        {
+            processo = processoCarregado;
+        }
+    }
 
     private void Salvar()
     {
-        dao.Inserir(processo);
+        if (Id.HasValue)
+        {
+            dao.Atualizar(processo);
+        }
+        else
+        {
+            dao.Inserir(processo);
+        }
 
-        // Retorna a página de processos após salvar
         NavigationManager.NavigateTo("/processos");
     }
 }

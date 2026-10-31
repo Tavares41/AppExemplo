@@ -42,14 +42,14 @@
 	<div class="table-responsive"> 
 		
 		<table class="table align-middle"> 
-			<thead> 
+			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Número</th>
 					<th>Interessado</th>
 					<th>Assunto</th>
 					<th>Situação</th>
-					<th>Ação</th>
+					<th>Ações</th>
 				</tr>
 			</thead>
 
@@ -67,17 +67,17 @@
 					<td>
 						<i class="bi bi-check-circle"> @p.Situacao</i>
 					</td>
-					<td class="text-end">
-						<div class="btn-group btn-group-sm"> 
-							<a href="#" class="btn btn-light border text-primary" title="Editar"> 
-								<i class="bi bi-pencil"></i>
-							</a>
+						<td class="text-end">
+							<div class="btn-group btn-group-sm">
+								<a href="@($"/processos/editar/{p.Id}")" class="btn btn-light border text-primary" title="Editar">
+									<i class="bi bi-pencil"></i>
+								</a>
 
-							<a href="#" class="btn btn-light border text-danger" title="Excluir">
-								<i class="bi bi-trash"></i>
-							</a>
-						</div>
-					</td>
+								<a href="@($"/processos/excluir/{p.Id}")" class="btn btn-light border text-danger" title="Excluir">
+									<i class="bi bi-trash"></i>
+								</a>
+							</div>
+						</td>
 				</tr>
 				}
 
